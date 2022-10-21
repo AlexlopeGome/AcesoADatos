@@ -2,27 +2,81 @@ package bd_zoologico;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import com.mysql.cj.xdevapi.PreparableStatement;
 
 public abstract class AnimalDAO {
 
 	private static Connection connection;
 	
-	public static void deleteAnimal(){
-		
+	public static Animal findById(int id) {
 		connection = openConnection();
-		String query ="delete from animales";
-		Statement statement;
+		
+		String query = "select * from animales where id = ?";
+		Animal animal = null;
+		
 		try {
-			statement = connection.createStatement();
-			statement.executeUpdate(query);
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				animal = new Animal(
+							rs.getInt("id"),
+							rs.getString("nombre"),
+							rs.getString("habitad"),
+							rs.getDouble("peso_aproximado") 
+						);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
+		
+		return animal;
+	}
+	
+	public static void deleteAnimalByNombre(String nombre) {
+		connection = openConnection();
+		String query ="delete from animales where nombre= ?";
+		
+		try {
+		
+			PreparedStatement preparestatement;
+			preparestatement = connection.prepareStatement(query);
+			preparestatement.setString(1, nombre);
+			preparestatement.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		closeConnection();
+	}
 		
+	
+	public static void deleteAllAnimal(){
+		
+		connection = openConnection();
+		String query ="delete from animales";
+		
+		try {
+			/*Statement statement;
+			statement = connection.createStatement();
+			statement.executeUpdate(query);*/
+			PreparedStatement preparestatement;
+			preparestatement = connection.prepareStatement(query);
+			preparestatement.executeUpdate(query);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
 	}
 	
 	
