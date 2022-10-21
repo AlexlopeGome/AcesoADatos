@@ -18,16 +18,16 @@ public abstract class AnimalDAO {
 		
 		int id = animal.getId();
 		String nombre = animal.getNombre();
-		String habitad = animal.getHabitad();
+		String habitat = animal.getHabitat();
 		double peso_aproximado = animal.getPeso_aproximado();
 		
-		String query = "update animales set nombre = ?, habitad = ?, "
+		String query = "update animales set nombre = ?, habitat = ?, "
 				+ "peso_aproximado = ? where id = ?";
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, nombre);
-			ps.setString(2, habitad);
+			ps.setString(2, habitat);
 			ps.setDouble(3, peso_aproximado);
 			ps.setInt(4, id);
 			ps.executeUpdate();
@@ -53,7 +53,7 @@ public static ArrayList<Animal> findAllAnimals() {
 				animal = new Animal(
 						rs.getInt("id"),
 						rs.getString("nombre"),
-						rs.getString("habitad"),
+						rs.getString("habitat"),
 						rs.getDouble("peso_aproximado") 
 					);
 				aR.add(animal);
@@ -85,7 +85,7 @@ public static ArrayList<Animal> findAllAnimals() {
 				animal = new Animal(
 							rs.getInt("id"),
 							rs.getString("nombre"),
-							rs.getString("habitad"),
+							rs.getString("habitat"),
 							rs.getDouble("peso_aproximado") 
 						);
 			}
@@ -141,11 +141,11 @@ public static ArrayList<Animal> findAllAnimals() {
 	public static void insertAnimal(Animal animal) {
 		connection = openConnection();
 		
-		String query="insert into animales(nombre,habitad, "+"peso_aproximado)values(?,?,?)";
+		String query="insert into animales(nombre,habitat, "+"peso_aproximado)values(?,?,?)";
 	try {
 		PreparedStatement preparedStatement=connection.prepareStatement(query);
 		preparedStatement.setString(1, animal.getNombre());
-		preparedStatement.setString(2, animal.getHabitad());
+		preparedStatement.setString(2, animal.getHabitat());
 		preparedStatement.setDouble(3, animal.getPeso_aproximado());
 		
 		preparedStatement.executeUpdate();

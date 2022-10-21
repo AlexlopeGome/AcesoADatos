@@ -25,12 +25,13 @@ public class Main {
 
 	//System.out.println(AnimalDAO.findAllAnimals());
 
-Animal a = AnimalDAO.findById(3);
-a.setNombre("PEPITO");
-a.setHabitad("Agua");
-a.setPeso_aproximado(10);
-AnimalDAO.updateAnimal(a);
+Animal c = AnimalDAO.findById(3);
+c.setNombre("PEPITO");
+c.setHabitat("Agua");
+c.setPeso_aproximado(10);
+AnimalDAO.updateAnimal(c);
 
+System.out.println(c);
 
 }
 }

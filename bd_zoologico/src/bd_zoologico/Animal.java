@@ -3,23 +3,23 @@ package bd_zoologico;
 public class Animal {
 	private int id;
 	private String nombre;
-	private String habitad;
+	private String habitat;
 	private double peso_aproximado;
 	
 	
-	public Animal(int id, String nombre, String habitad, double  peso_aproximado) {
+	public Animal(int id, String nombre, String habitat, double  peso_aproximado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.habitad = habitad;
+		this.habitat = habitat;
 		this.peso_aproximado = peso_aproximado;
 	}
 
 
-	public Animal(String nombre, String habitad, double  peso_aproximado) {
+	public Animal(String nombre, String habitat, double  peso_aproximado) {
 		super();
 		this.nombre = nombre;
-		this.habitad = habitad;
+		this.habitat = habitat;
 		this.peso_aproximado = peso_aproximado;
 	}
 
@@ -44,13 +44,13 @@ public class Animal {
 	}
 
 
-	public String getHabitad() {
-		return habitad;
+	public String getHabitat() {
+		return habitat;
 	}
 
 
-	public void setHabitad(String habitad) {
-		this.habitad = habitad;
+	public void setHabitat(String habitad) {
+		this.habitat = habitad;
 	}
 
 
@@ -66,7 +66,7 @@ public class Animal {
 
 	@Override
 	public String toString() {
-		return "Animal: (Id;" + id + ", Nombre;" + nombre + ", Habitad;" + habitad + ", Peso Aproximado;"
+		return "Animal: (Id;" + id + ", Nombre;" + nombre + ", Habitad;" + habitat + ", Peso Aproximado;"
 				+ peso_aproximado + ")\n";
 	}
 	
