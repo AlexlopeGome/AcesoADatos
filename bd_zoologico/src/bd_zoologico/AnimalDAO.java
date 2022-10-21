@@ -5,16 +5,42 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.mysql.cj.xdevapi.PreparableStatement;
 
 public abstract class AnimalDAO {
 
 	private static Connection connection;
+	//Buscar todos los animales
 	
+public static ArrayList<Animal> findAllAnimals() throws SQLException{
+		
+		connection=openConnection();
+		ArrayList<Animal> aR=new ArrayList<Animal>();
+		String query="select * from animales";
+		PreparedStatement ps=connection.prepareStatement(query);
+		ResultSet rs=ps.executeQuery();
+		Animal animal = null;
+		while (rs.next()) {
+			animal = new Animal(
+					rs.getInt("id"),
+					rs.getString("nombre"),
+					rs.getString("habitad"),
+					rs.getDouble("peso_aproximado") 
+				);
+			aR.add(animal);
+		}
+		
+		closeConnection();
+		
+		return aR;
+		
+	}
+	
+	//Buscar animal Id
 	public static Animal findById(int id) {
 		connection = openConnection();
-		
 		String query = "select * from animales where id = ?";
 		Animal animal = null;
 		
@@ -39,7 +65,7 @@ public abstract class AnimalDAO {
 		
 		return animal;
 	}
-	
+	//borrar animal por nombre
 	public static void deleteAnimalByNombre(String nombre) {
 		connection = openConnection();
 		String query ="delete from animales where nombre= ?";
@@ -58,7 +84,7 @@ public abstract class AnimalDAO {
 		closeConnection();
 	}
 		
-	
+	//borrar todos los animales
 	public static void deleteAllAnimal(){
 		
 		connection = openConnection();
