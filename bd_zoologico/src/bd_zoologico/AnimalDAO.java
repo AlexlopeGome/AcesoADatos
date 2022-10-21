@@ -12,25 +12,57 @@ import com.mysql.cj.xdevapi.PreparableStatement;
 public abstract class AnimalDAO {
 
 	private static Connection connection;
-	//Buscar todos los animales
+	///	Modificar un animal
+	public static void updateAnimal (Animal animal) {
+		connection = openConnection();
+		
+		int id = animal.getId();
+		String nombre = animal.getNombre();
+		String habitad = animal.getHabitad();
+		double peso_aproximado = animal.getPeso_aproximado();
+		
+		String query = "update animales set nombre = ?, habitad = ?, "
+				+ "peso_aproximado = ? where id = ?";
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, nombre);
+			ps.setString(2, habitad);
+			ps.setDouble(3, peso_aproximado);
+			ps.setInt(4, id);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		closeConnection();
+	}
 	
-public static ArrayList<Animal> findAllAnimals() throws SQLException{
+public static ArrayList<Animal> findAllAnimals() {
 		
 		connection=openConnection();
 		ArrayList<Animal> aR=new ArrayList<Animal>();
 		String query="select * from animales";
-		PreparedStatement ps=connection.prepareStatement(query);
-		ResultSet rs=ps.executeQuery();
-		Animal animal = null;
-		while (rs.next()) {
-			animal = new Animal(
-					rs.getInt("id"),
-					rs.getString("nombre"),
-					rs.getString("habitad"),
-					rs.getDouble("peso_aproximado") 
-				);
-			aR.add(animal);
+		PreparedStatement ps;
+		try {
+			ps = connection.prepareStatement(query);
+			ResultSet rs=ps.executeQuery();
+			Animal animal = null;
+			while (rs.next()) {
+				animal = new Animal(
+						rs.getInt("id"),
+						rs.getString("nombre"),
+						rs.getString("habitad"),
+						rs.getDouble("peso_aproximado") 
+					);
+				aR.add(animal);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		
 		closeConnection();
 		
