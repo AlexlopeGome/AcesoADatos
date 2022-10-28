@@ -1,4 +1,4 @@
-package bd_zoologico;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

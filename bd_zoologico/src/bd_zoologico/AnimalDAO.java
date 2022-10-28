@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import com.mysql.cj.xdevapi.PreparableStatement;
 
+import util.DataBaseConnection;
+
 public abstract class AnimalDAO {
 
 	private static Connection connection;
