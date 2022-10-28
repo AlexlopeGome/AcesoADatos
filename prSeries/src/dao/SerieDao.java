@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,27 +20,6 @@ public void SerieDao() {
 }
 
 	
-
-
-public Connection getConnection() {
-	
-	String dbName= "bd_series";
-	String userName= "root";
-	String password= "capi1984";
-	try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		
-		connection= DriverManager.getConnection(
-				"jdbc:mysql://localhost/"+dbName,
-				userName,
-				password);
-	} catch ( Exception e) {
-		// TODO: handle exception
-	}
-	
-	return connection;
-	
-}
 
 private static Connection  openConnection() {
 	
@@ -60,16 +40,38 @@ private  static void closeConnection() {
 }
 	@Override
 	public ArrayList<Serie> buscarTodos() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public Serie buscarPorId(int i) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select * from Series where id = ?";
+		Serie serie = null;
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, i);
+			ResultSet rs = ps.executeQuery();
+				
+			while (rs.next()) {
+				serie = new Serie(
+							rs.getInt("id"),
+							rs.getString("titulo"),
+							rs.getInt("edad"),
+							rs.getString("plataforma"),  
+							null
+						);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
+		
+		return serie;
 	}
-
+		
 	@Override
 	public void insertar(Serie serie) {
 		connection= openConnection();
