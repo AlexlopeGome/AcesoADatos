@@ -9,7 +9,7 @@ import pojo.Temporada;
 import util.DataBaseConnection;
 
 
-public class TemporadaDao implements Dao<Temporada> {
+public class TemporadaDao extends ObjetoDao  implements InterfazDao<Temporada> {
 	
 	private static Connection connection;
 	
@@ -17,11 +17,8 @@ public class TemporadaDao implements Dao<Temporada> {
 		
 	}
 
-	@Override
-	public ArrayList<Temporada> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+
 
 	@Override
 	public Temporada buscarPorId(int i) {
@@ -63,13 +60,13 @@ public class TemporadaDao implements Dao<Temporada> {
 		
 	}
 	
-	private static Connection openConnection() {
+	protected static Connection openConnection() {
 		DataBaseConnection dbConnection = new DataBaseConnection();
 		connection = dbConnection.getConnection();
 		return connection;
 	}
 	
-	private static void closeConnection() {
+	protected static void closeConnection() {
 		try {
 			connection.close();
 			connection = null;
@@ -77,6 +74,15 @@ public class TemporadaDao implements Dao<Temporada> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+
+
+
+	@Override
+	public ArrayList<Temporada> buscarTodos() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
