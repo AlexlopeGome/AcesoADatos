@@ -160,21 +160,26 @@ public class SerieDao  extends ObjetoDao implements InterfazDao<Serie>{
 
 	
 	@Override
-	public void borrar(Serie s) {
+	public void borrar(Serie serie) {
 		// TODO Auto-generated method stub
 		 connection = openConnection();
-		 int id=s.getId();
+		 int serie_id=serie.getId();
+		 
+		 TemporadaDao temporadaDao=new TemporadaDao();
+		 temporadaDao.borrarPorserie(serie_id);
+		 connection = openConnection();
+		 
 	        String query = "DELETE FROM series where id=?;";
 	        try {
 	            PreparedStatement ps = connection.prepareStatement(query);
-	            ps.setInt(1, s.getId());
+	            ps.setInt(1, serie.getId());
 	            ps.executeUpdate();
 	        } catch (SQLException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
-
 	        closeConnection();
+	        
 	}
 
 }

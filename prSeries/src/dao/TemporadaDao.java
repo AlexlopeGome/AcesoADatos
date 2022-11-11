@@ -79,7 +79,7 @@ connection = openConnection();
 		
 	}
 		
-	}
+	
 
 	@Override
 	public void borrar(Temporada t) {
