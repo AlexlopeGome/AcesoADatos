@@ -1,12 +1,17 @@
 package pojo;
 
+import java.util.ArrayList;
+
 public class Persona {
 
 	private int id;
 	private String nombre;
 	private String apellidos;
 	private int edad;
+	private ArrayList<Enfermedad> enfermedades;
 	
+	
+
 	public Persona(int id, String nombre, String apellidos, int edad) {
 		super();
 		this.id = id;
@@ -47,6 +52,15 @@ public class Persona {
 		this.edad = edad;
 	}
 
+	public ArrayList<Enfermedad> getEnfermedades() {
+		return enfermedades;
+	}
+
+	public void setEnfermedades(ArrayList<Enfermedad> enfermedades) {
+		this.enfermedades = enfermedades;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Paciente (id:" + id + ", nombre " + nombre + apellidos + "edad=" + edad + ")";
