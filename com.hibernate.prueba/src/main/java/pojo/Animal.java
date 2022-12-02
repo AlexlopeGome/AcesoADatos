@@ -24,7 +24,7 @@ public class Animal implements java.io.Serializable {
 	private String nombre;
 	
 	@Column(name="habitad",nullable=false,length=40)
-	private String habitat;
+	private String habitad;
 	
 	@Column(name="peso_aproximado",nullable=false,length=10,precision=2)
 	private BigDecimal pesoAproximado;
@@ -34,7 +34,7 @@ public class Animal implements java.io.Serializable {
 
 	public Animal(String nombre, String habitat, BigDecimal pesoAproximado) {
 		this.nombre = nombre;
-		this.habitat = habitat;
+		this.habitad = habitat;
 		this.pesoAproximado = pesoAproximado;
 	}
 
@@ -54,12 +54,12 @@ public class Animal implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getHabitat() {
-		return this.habitat;
+	public String getHabitad() {
+		return this.habitad;
 	}
 
 	public void setHabitat(String habitat) {
-		this.habitat = habitat;
+		this.habitad = habitat;
 	}
 
 	public BigDecimal getPesoAproximado() {
