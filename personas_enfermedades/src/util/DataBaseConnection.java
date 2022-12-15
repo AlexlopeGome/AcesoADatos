@@ -2,7 +2,9 @@ package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+/**
+ * es el util q usa conectarnos con la base de datos
+ */
 public class DataBaseConnection {
 
 Connection connection;	
