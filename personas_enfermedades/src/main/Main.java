@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dao.PersonaDao;
 import dao.EnfermedadDao;
+import dao.ObjetoDao;
 import pojo.Persona;
 import pojo.Enfermedad;
 
@@ -15,6 +16,12 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+		// clemos un objeto Dao
+
+		ObjetoDao dao = new ObjetoDao();
+		// creamos tablas
+		dao.crearTablas();
 
 		// creamos dos objetos persona
 		Persona p1 = new Persona("Alex", "Lopez", "Gomez", 38);
@@ -74,12 +81,16 @@ public class Main {
 		// buscamos una persona con id 2 para comprobar su estado
 		Persona per = personaDao.buscarPorId(2);
 		System.out.println(per);
-		
+
 		// borramos la enfermedad asijnada a la persona 2
 		enfermedadDao.borrarPorpersona(2);
-		
+
 		// buscamos la persona 2 para comprobar si tiene asignada la enfermedad
 		System.out.println(personaDao.buscarPorId(2));
+
+		// borramos tablas
+		dao.borrarTablas();
+		;
 
 	}
 }
