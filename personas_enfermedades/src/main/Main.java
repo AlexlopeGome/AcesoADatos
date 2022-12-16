@@ -18,7 +18,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		// clemos un objeto Dao
-
+		System.out.println("--Creamos las Tablas--");
 		ObjetoDao dao = new ObjetoDao();
 		// creamos tablas
 		dao.crearTablas();
@@ -88,6 +88,7 @@ public class Main {
 		// buscamos la persona 2 para comprobar si tiene asignada la enfermedad
 		System.out.println(personaDao.buscarPorId(2));
 
+		System.out.println("--Borrado de tablas Correctos--");
 		// borramos tablas
 		dao.borrarTablas();
 		;
